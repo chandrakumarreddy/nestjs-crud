@@ -6,13 +6,16 @@ import {
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 import { FeedModule } from './feed/feed.module';
+import compression from '@fastify/compress';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
   );
+
   app.setGlobalPrefix('api');
+  await app.register(compression, { encodings: ['gzip', 'deflate'] });
 
   const config = new DocumentBuilder()
     .setTitle('Fake Linkedin api')
