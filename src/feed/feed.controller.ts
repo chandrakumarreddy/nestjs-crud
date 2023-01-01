@@ -23,8 +23,8 @@ export class FeedController {
   }
 
   @Get()
-  findAllPosts(): Observable<FeedPost[]> {
-    return this.feedService.findAllPosts();
+  findAllPosts(@Query('start') start = 0): Observable<FeedPost[]> {
+    return this.feedService.findAllPosts(start);
   }
 
   @Put(':id')
