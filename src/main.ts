@@ -7,6 +7,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 import { FeedModule } from './feed/feed.module';
 import compression from '@fastify/compress';
+import { LoginModule } from './login/login.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -25,7 +26,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config, {
     deepScanRoutes: true,
-    include: [FeedModule],
+    include: [LoginModule, FeedModule],
   });
   SwaggerModule.setup('api-docs', app, document, {
     customSiteTitle: 'Fake Linkedin api docs',
