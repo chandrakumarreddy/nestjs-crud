@@ -8,10 +8,13 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { FeedService } from './feed.service';
 import { FeedPost } from './models/posts.interface';
+import { Public } from 'src/helpers/custom-decorators';
+// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('feed')
 export class FeedController {
@@ -22,6 +25,7 @@ export class FeedController {
     return this.feedService.createPost(feed);
   }
 
+  // @Public()
   @Get()
   findAllPosts(@Query('start') start = 0): Observable<FeedPost[]> {
     return this.feedService.findAllPosts(start);
