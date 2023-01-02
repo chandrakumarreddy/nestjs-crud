@@ -15,7 +15,7 @@ import { FeedPost } from './models/posts.interface';
 
 @Controller('feed')
 export class FeedController {
-  constructor(private feedService: FeedService) {}
+  constructor(private readonly feedService: FeedService) {}
 
   @Post()
   createPost(@Body() feed: FeedPost): Observable<FeedPost> {
